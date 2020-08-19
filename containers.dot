@@ -1,0 +1,90 @@
+digraph {
+  graph [pad="0.5", nodesep="0.25", ranksep="0.85"];
+  node [color="#5e6687", shape="box"];
+  edge [color="#5e6687", arrowhead="empty"];
+
+  subgraph cluster_legend {
+    node [fillcolor=none, shape=plaintext]
+    key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+         <tr><td align="right" port="i1">Foo.to_bar</td></tr>
+         <tr><td height="30px" align="right" port="i2">Bar.of_foo</td></tr>
+         </table>>]
+    key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+          <tr><td port="i1">&nbsp;</td></tr>
+          <tr><td height="30px" port="i2">&nbsp;</td></tr>
+          </table>>]
+    key:i1:e -> key2:i1:w [color=green]
+    key:i2:e -> key2:i2:w [color=red]
+  }
+
+
+  // List
+  List -> Seq [color=green]
+  Seq -> List [color=red]
+
+  // Array
+  Array -> List [color=green]
+  Array -> Seq [color=green]
+  List -> Array [color=red]
+  Seq -> Array [color=red]
+
+  // Float.Array
+  "Float.Array" -> List [color=green]
+  "Float.Array" -> Seq [color=green]
+  List -> "Float.Array" [color=red]
+  Seq -> "Float.Array" [color=red]
+
+  // Hashtbl
+  Hashtbl -> Seq [color=green]
+  Seq -> Hashtbl [color=red]
+
+  // Map
+  Map -> Seq [color=green]
+  Seq -> Map [color=red]
+
+  // Set
+  Set -> Seq [color=green]
+  List -> Set [color=red]
+  Seq -> Set [color=red]
+
+  // Bytes
+  Bytes -> Seq [color=green]
+  Bytes -> String [color=green]
+  String -> Bytes [color=red]
+  Seq -> Bytes [color=red]
+
+  // Buffer
+  Buffer -> Bytes [color=green]
+  Buffer -> Seq [color=green]
+  Seq -> Buffer [color=red]
+
+  // Bigarray
+  Array -> Bigarray [color=red]
+
+  // Stack
+  Stack -> Seq [color=green]
+  Seq -> Stack [color=red]
+
+  // Stream
+  List -> Stream [color=red]
+  String -> Stream [color=red]
+  Bytes -> Stream [color=red]
+
+  // String
+  String -> Seq [color=green]
+  Seq -> String [color=red]
+
+  // Result
+  Result -> List [color=green]
+  Result -> Option [color=green]
+  Result -> Seq [color=green]
+
+  // Queue
+  Queue -> Seq [color=green]
+  Seq -> Queue [color=red]
+
+  // Option
+  Option -> Result [color=green]
+  Option -> List [color=green]
+  Option -> Seq [color=green]
+}

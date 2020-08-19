@@ -1,0 +1,68 @@
+digraph {
+  graph [pad="0.5", nodesep="0.25", ranksep="0.85"];
+  node [color="#5e6687", shape="box"];
+  edge [color="#5e6687", arrowhead="empty", arrowtail="empty"];
+
+  subgraph cluster_legend {
+    node [fillcolor=none, shape=plaintext]
+    key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+         <tr><td align="right" port="i1">Foo.to_bar</td></tr>
+         <tr><td height="30px" align="right" port="i2">Bar.of_foo</td></tr>
+         <tr><td align="right" port="i3">(partial)</td></tr>
+         </table>>]
+    key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+          <tr><td port="i1">&nbsp;</td></tr>
+          <tr><td height="30px" port="i2">&nbsp;</td></tr>
+          <tr><td port="i3">&nbsp;</td></tr>
+          </table>>]
+    key:i1:e -> key2:i1:w [color=green]
+    key:i2:e -> key2:i2:w [color=red]
+    key:i3:e -> key2:i3:w [style=dashed]
+  }
+
+  // Int & Float
+  Int -> Float [color=green, dir=both]
+  Float -> Int [color=red, dir=both]
+
+  // Int32
+  Int32 -> Int [color=green]
+  Int32 -> Float [color=green]
+  Int -> Int32 [color=red]
+  Float -> Int32 [color=red]
+
+  // Int64
+  Int64 -> Int [color=green]
+  Int64 -> Int32 [color=green]
+  Int64 -> Nativeint [color=green]
+  Int64 -> Float [color=green]
+  Int -> Int64 [color=red]
+  Int32 -> Int64 [color=red]
+  Nativeint -> Int64 [color=red]
+  Float -> Int64 [color=red]
+
+  // Nativeint
+  Nativeint -> Int [color=green]
+  Nativeint -> Int32 [color=green]
+  Nativeint -> Float [color=green]
+  Int -> Nativeint [color=red]
+  Int32 -> Nativeint [color=red]
+  Float -> Nativeint [color=red]
+
+  // Char
+  Char -> Int [color=green]
+  Int -> Char [style=dashed, color=red]
+
+  // Bool
+  Bool -> Int [color=green]
+  Bool -> Float [color=green]
+
+  // Bytes
+
+  // Uchar
+  Uchar -> Int [color=green]
+  Uchar -> Char [style=dashed, color=green]
+  Int -> Uchar [style=dashed, color=red]
+  Char -> Uchar [color=red]
+
+  // Unit
+}
